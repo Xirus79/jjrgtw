@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYBER_PROFILE // NETRUNNER ID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --neon-yellow: #fcee0a;
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff0055;
+      --neon-green: #05ffa1;
+      --cyber-dark: #07090e;
+      --cyber-card: #0d111a;
+      --cyber-panel: #141a29;
+      --cyber-border: #1f2c42;
+      --grid-line: rgba(0, 240, 255, 0.08);
+      --glitch-pink: #ff0055;
+      --glitch-cyan: #00f0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--cyber-dark);
+      background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        radial-gradient(ellipse at 50% 20%, rgba(255, 0, 85, 0.15) 0%, rgba(0, 240, 255, 0.08) 40%, transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(252, 238, 10, 0.05) 0%, transparent 50%);
+      background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      font-family: 'Rajdhani', sans-serif;
+      color: #e6f1ff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Scanlines Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* Main Cyberpunk Card */
+    .profile-card {
+      position: relative;
+      background: var(--cyber-card);
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      clip-path: polygon(
+        0 18px, 
+        18px 0, 
+        calc(100% - 22px) 0, 
+        100% 22px, 
+        100% calc(100% - 24px), 
+        calc(100% - 24px) 100%, 
+        20px 100%, 
+        0 calc(100% - 20px)
+      );
+      box-shadow: 
+        0 0 35px rgba(0, 240, 255, 0.12),
+        0 0 70px rgba(255, 0, 85, 0.08),
+        inset 0 0 25px rgba(0, 240, 255, 0.03);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Outer Tech Corner Markers */
+    .profile-card::after {
+      content: "SYS_REC // VER. 2.077";
+      position: absolute;
+      bottom: 6px;
+      right: 28px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: rgba(0, 240, 255, 0.5);
+      pointer-events: none;
+    }
+
+    /* Banner */
+    .banner {
+      height: 150px;
+      background: 
+        linear-gradient(135deg, rgba(255, 0, 85, 0.85) 0%, rgba(20, 10, 45, 0.95) 50%, rgba(0, 240, 255, 0.8) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.25) 10px, rgba(0, 0, 0, 0.25) 20px);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid var(--neon-cyan);
+    }
+
+    /* Grid pattern in banner */
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    .banner-hud {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 3px 8px;
+      border-left: 2px solid var(--neon-cyan);
+    }
+
+    .banner-badge {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: var(--neon-yellow);
+      color: #000;
+      padding: 4px 14px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 900;
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      box-shadow: 0 0 15px rgba(252, 238, 10, 0.6);
+    }
+
+    /* Header & Avatar */
+    .header-content {
+      padding: 0 24px;
+      position: relative;
+      margin-top: -55px;
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      background: #000;
+      padding: 4px;
+      clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+      border: 2px solid var(--neon-pink);
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.4), inset 0 0 10px rgba(255, 0, 85, 0.2);
+    }
+
+    .avatar-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+      clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+      z-index: -1;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      object-fit: cover;
+      display: block;
+      background: #090c14;
+    }
+
+    .status-dot {
+      width: 14px;
+      height: 14px;
+      background-color: var(--neon-green);
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      clip-path: polygon(30% 0, 100% 30%, 70% 100%, 0 70%);
+      box-shadow: 0 0 10px var(--neon-green);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.2); }
+    }
+
+    .name-details {
+      padding-bottom: 8px;
+    }
+
+    .username {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    }
+
+    .tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px rgba(252, 238, 10, 0.5);
+    }
+
+    .title {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--neon-cyan);
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Content Area */
+    .content {
+      padding: 24px;
+    }
+
+    /* Cyber Level Section */
+    .level-container {
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      border-left: 4px solid var(--neon-cyan);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      color: #9cb1cf;
+    }
+
+    .level-num {
+      color: var(--neon-yellow);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-shadow: 0 0 8px rgba(252, 238, 10, 0.5);
+    }
+
+    .progress-bar-bg {
+      background: #090c13;
+      height: 10px;
+      border: 1px solid #1a2538;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+      width: 72%;
+      height: 100%;
+      box-shadow: 0 0 12px var(--neon-cyan);
+      position: relative;
+    }
+
+    .progress-bar-fill::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: #fff;
+      box-shadow: 0 0 8px #fff;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      padding: 14px 10px;
+      text-align: center;
+      position: relative;
+      transition: all 0.25s ease;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+      transition: background 0.25s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .stat-card:hover::before {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: #7b8fa7;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Badges */
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--neon-pink);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 0, 85, 0.4), transparent);
+    }
+
+    .badges-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .badge-item {
+      background: rgba(13, 21, 33, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00f0ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+
+    .badge-item:hover {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 14px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 18px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--neon-cyan);
+      color: #050811;
+      border: 1px solid var(--neon-cyan);
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--neon-pink);
+      border: 1px solid var(--neon-pink);
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      box-shadow: inset 0 0 10px rgba(255, 0, 85, 0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 0, 85, 0.15);
+      box-shadow: 0 0 18px rgba(255, 0, 85, 0.4), inset 0 0 12px rgba(255, 0, 85, 0.3);
+      color: #fff;
+    }
+
+    /* Decorative HUD lines */
+    .hud-dec {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 24px;
+      margin-top: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(0, 240, 255, 0.4);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+    <!-- Banner Atas -->
+    <div class="banner">
+      <span class="banner-hud">// NET_CONNECTED: SECURE</span>
+      <span class="banner-badge">CYBER_ELITE</span>
+    </div>
+
+    <!-- Header Profil -->
+    <div class="header-content">
+      <div class="avatar-wrapper">
+        <!-- Cyber Avatar SVG -->
+        <svg class="avatar" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#0c101c"/>
+          <!-- Cyber Visor / Face Mask -->
+          <polygon points="25,48 75,48 70,62 30,62" fill="#00f0ff" opacity="0.9"/>
+          <line x1="20" y1="55" x2="80" y2="55" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+          <!-- Head Silhouette -->
+          <path d="M50 18 C34 18 24 30 24 46 C24 64 36 78 50 78 C64 78 76 64 76 46 C76 30 66 18 50 18 Z" stroke="#ff0055" stroke-width="2.5" fill="none"/>
+          <path d="M16 88 C16 72 30 66 50 66 C70 66 84 72 84 88" stroke="#00f0ff" stroke-width="2.5" fill="none"/>
+          <!-- Tech grid marks -->
+          <circle cx="50" cy="30" r="3" fill="#fcee0a"/>
+          <line x1="40" y1="38" x2="60" y2="38" stroke="#00f0ff" stroke-width="1.5"/>
+        </svg>
+        <span class="status-dot" title="SYNCED"></span>
+      </div>
+      <div class="name-details">
+        <h1 class="username">SHADOW_NET <span class="tag">#2077</span></h1>
+        <p class="title">⚡ NETRUNNER // DUELIST CLASS</p>
+      </div>
+    </div>
+
+    <div class="hud-dec">
+      <span>LATENCY: 12ms</span>
+      <span>STATUS: OVERCLOCKED</span>
+    </div>
+
+    <!-- Konten Detail Profil -->
+    <div class="content">
+      <!-- Info Level & XP -->
+      <div class="level-container">
+        <div class="level-header">
+          <span>PROGRESSION // LVL <span class="level-num">78</span></span>
+          <span>EXP [ 7,200 / 10,000 ]</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- Statistik Utama -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">1,420</div>
+          <div class="stat-label">PROTOCOLS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--neon-cyan);">68.5%</div>
+          <div class="stat-label">WIN_SYNC</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--neon-pink);">3.42</div>
+          <div class="stat-label">K/D INDEX</div>
+        </div>
+      </div>
+
+      <!-- Lencana / Cyber Implants & Prestasi -->
+      <div class="section-title">CYBER_AWARDS & ACHIEVEMENTS</div>
+      <div class="badges-list">
+        <span class="badge-item">🏆 TOURNAMENT_CHAMP</span>
+        <span class="badge-item">🎯 DEEP_HEADSHOT</span>
+        <span class="badge-item">🛡️ CHROME_TITAN</span>
+        <span class="badge-item">⚡ 100_OVERDRIVE</span>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <div class="actions">
+        <button class="btn btn-primary" onclick="alert('CONNECT REQUEST SENT!')">+ LINK NODE</button>
+        <button class="btn btn-secondary" onclick="alert('INITIALIZING COMMS PROTOCOL...')">EXECUTE CHAT</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
