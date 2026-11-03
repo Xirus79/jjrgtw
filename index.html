@@ -392,7 +392,75 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
+    }
+
+    /* Favorite Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .game-card {
+      background: var(--cyber-panel);
+      border: 1px solid var(--cyber-border);
+      padding: 12px 8px;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .game-card:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+      background: rgba(20, 26, 41, 0.95);
+    }
+
+    .game-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+      transition: background 0.25s;
+    }
+
+    .game-card:hover::before {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .game-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .game-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .game-genre {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-yellow);
+      letter-spacing: 0.8px;
     }
 
     .badge-item {
@@ -557,6 +625,26 @@
         <span class="badge-item">🎯 DEEP_HEADSHOT</span>
         <span class="badge-item">🛡️ CHROME_TITAN</span>
         <span class="badge-item">⚡ 100_OVERDRIVE</span>
+      </div>
+
+      <!-- Favorite Games -->
+      <div class="section-title">FAVORITE_GAMES // PROTOCOLS</div>
+      <div class="games-grid">
+        <div class="game-card">
+          <div class="game-icon">🧟</div>
+          <div class="game-title">LEFT 4 DEAD</div>
+          <div class="game-genre">CO-OP SURVIVAL</div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🦾</div>
+          <div class="game-title">CYBERPUNK 2077</div>
+          <div class="game-genre">OPEN-WORLD RPG</div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">☣️</div>
+          <div class="game-title">WORLD WAR Z</div>
+          <div class="game-genre">SWARM SHOOTER</div>
+        </div>
       </div>
 
       <!-- Tombol Aksi -->
